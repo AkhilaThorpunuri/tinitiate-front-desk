@@ -14,7 +14,7 @@ window.Shell = (function () {
 
   const T = {
     en: {
-      brand: 'Tinitiate-Front-Desk', navHome: 'Home', navDesk: 'Walk-in desk', navCourses: 'Courses', navQuestions: 'Questions', navPractice: 'Practice',
+      brand: 'Tinitiate-Front-Desk', navHome: 'Home', navDesk: 'Walk-in desk', navCourses: 'Courses', navQuestions: 'Questions', navPractice: 'Practice', navEnquiry: 'Enquiry',
       homeKicker: 'Front desk course training', homeTitle: 'Explain every course with confidence, in three languages.',
       homeLead: 'Ramesh, this is your practice space. Learn what to say to walk-in visitors, then read it aloud. The page listens, highlights each word and gives you a score.',
       pathTitle: 'Your training path', pathLead: 'Follow these steps in order. A lesson counts as ready at a score of 80 or more.',
@@ -22,7 +22,7 @@ window.Shell = (function () {
       p2: 'Learn the courses', p2d: 'All 15 courses on the price sheet, with duration and fee.',
       p3: 'Prepare for questions', p3d: 'Honest answers to fees, jobs, tax and more.',
       p4: 'Practise aloud', p4d: 'Read each script aloud and score 80 or more.',
-      p5: 'Take the fee quiz', p5d: 'Check that you remember every fee without the sheet.',
+      p5: 'Enquiry desk', p5d: 'Handle walk-in queries, track student leads, and log details.',
       progressTitle: 'Your progress', progressNote: 'Scores are saved in this browser, on this computer only.',
       lessonsReady: 'lessons ready', quizBest: 'Best quiz score', notYet: 'Not taken yet', open: 'Open',
       sheetTitle: 'Price sheet', sheetLead: 'Fees and durations below come from this sheet. If the sheet changes, the sheet is right.', viewSheet: 'Open the full price sheet',
@@ -65,7 +65,7 @@ window.Shell = (function () {
       backHome: 'Back to home', rs: 'Rs.', footer: 'Internal training for the Tinitiate AI front desk.', langLabel: 'Language'
     },
     te: {
-      brand: 'రమేష్ ట్రైనింగ్', navHome: 'హోమ్', navDesk: 'వాక్-ఇన్ డెస్క్', navCourses: 'కోర్సులు', navQuestions: 'ప్రశ్నలు', navPractice: 'ప్రాక్టీస్', navQuiz: 'ఫీజు క్విజ్',
+      brand: 'Tinitiate-Front-Desk', navHome: 'హోమ్', navDesk: 'వాక్-ఇన్ డెస్క్', navCourses: 'కోర్సులు', navQuestions: 'ప్రశ్నలు', navPractice: 'ప్రాక్టీస్', navQuiz: 'ఫీజు క్విజ్', navEnquiry: 'విచారణ',
       homeKicker: 'ఫ్రంట్ డెస్క్ కోర్సు శిక్షణ', homeTitle: 'ప్రతి కోర్సును మూడు భాషల్లో ధైర్యంగా వివరించండి.',
       homeLead: 'రమేష్, ఇది మీ ప్రాక్టీస్ స్థలం. వాక్-ఇన్ వచ్చినవారితో ఏం మాట్లాడాలో నేర్చుకుని, గట్టిగా చదవండి. ఈ పేజీ మీ మాట విని, ప్రతి పదాన్ని హైలైట్ చేసి, స్కోర్ ఇస్తుంది.',
       pathTitle: 'మీ శిక్షణ మార్గం', pathLead: 'ఈ దశలను వరుసగా పాటించండి. 80 లేదా అంతకంటే ఎక్కువ స్కోర్ వస్తే పాఠం సిద్ధమైనట్టు.',
@@ -73,7 +73,7 @@ window.Shell = (function () {
       p2: 'కోర్సులు నేర్చుకోండి', p2d: 'ప్రైస్ షీట్‌లోని 15 కోర్సులు, వ్యవధి, ఫీజుతో సహా.',
       p3: 'ప్రశ్నలకు సిద్ధం కండి', p3d: 'ఫీజు, ఉద్యోగం, టాక్స్ గురించి నిజాయితీ సమాధానాలు.',
       p4: 'గట్టిగా ప్రాక్టీస్ చేయండి', p4d: 'ప్రతి స్క్రిప్ట్ చదివి 80 లేదా ఎక్కువ స్కోర్ తెచ్చుకోండి.',
-      p5: 'ఫీజు క్విజ్ రాయండి', p5d: 'షీట్ చూడకుండా ప్రతి ఫీజు గుర్తుందో చూసుకోండి.',
+      p5: 'విచారణ డెస్క్', p5d: 'వాక్-ఇన్ విచారణలు మరియు విద్యార్థి వివరాలను నమోదు చేయండి.',
       progressTitle: 'మీ ప్రగతి', progressNote: 'స్కోర్లు ఈ కంప్యూటర్‌లోని ఈ బ్రౌజర్‌లో మాత్రమే ఉంటాయి.',
       lessonsReady: 'పాఠాలు సిద్ధం', quizBest: 'క్విజ్ ఉత్తమ స్కోర్', notYet: 'ఇంకా రాయలేదు', open: 'తెరవండి',
       sheetTitle: 'ప్రైస్ షీట్', sheetLead: 'ఇక్కడి ఫీజులు, వ్యవధులు ఈ షీట్ నుంచి తీసుకున్నవి. షీట్ మారితే, షీట్‌నే పాటించండి.', viewSheet: 'పూర్తి ప్రైస్ షీట్ తెరవండి',
@@ -116,7 +116,7 @@ window.Shell = (function () {
       backHome: 'హోమ్‌కు వెళ్లండి', rs: 'రూ.', footer: 'Tinitiate AI ఫ్రంట్ డెస్క్ అంతర్గత శిక్షణ.', langLabel: 'భాష'
     },
     hi: {
-      brand: 'रमेश ट्रेनिंग', navHome: 'होम', navDesk: 'वॉक-इन डेस्क', navCourses: 'कोर्स', navQuestions: 'सवाल', navPractice: 'प्रैक्टिस', navQuiz: 'फीस क्विज़',
+      brand: 'Tinitiate-Front-Desk', navHome: 'होम', navDesk: 'वॉक-इन डेस्क', navCourses: 'कोर्स', navQuestions: 'सवाल', navPractice: 'प्रैक्टिस', navQuiz: 'फीस क्विज़', navEnquiry: 'पूछताछ',
       homeKicker: 'फ्रंट डेस्क कोर्स ट्रेनिंग', homeTitle: 'हर कोर्स को तीन भाषाओं में भरोसे से समझाएं।',
       homeLead: 'रमेश, यह आपकी प्रैक्टिस की जगह है। वॉक-इन आने वालों से क्या कहना है, यह सीखें और ज़ोर से पढ़ें। यह पेज आपको सुनता है, हर शब्द को हाइलाइट करता है और स्कोर देता है।',
       pathTitle: 'आपका ट्रेनिंग रास्ता', pathLead: 'इन चरणों को क्रम से पूरा करें। 80 या उससे ज़्यादा स्कोर पर पाठ तैयार माना जाता है।',
@@ -124,7 +124,7 @@ window.Shell = (function () {
       p2: 'कोर्स सीखें', p2d: 'प्राइस शीट के सभी 15 कोर्स, अवधि और फीस के साथ।',
       p3: 'सवालों की तैयारी करें', p3d: 'फीस, नौकरी, टैक्स पर ईमानदार जवाब।',
       p4: 'ज़ोर से प्रैक्टिस करें', p4d: 'हर स्क्रिप्ट पढ़ें और 80 या ज़्यादा स्कोर लाएं।',
-      p5: 'फीस क्विज़ दें', p5d: 'देखें कि बिना शीट के हर फीस याद है या नहीं।',
+      p5: 'पूछताछ डेस्क', p5d: 'आने वाली पूछताछ संभालें और विवरण दर्ज करें।',
       progressTitle: 'आपकी प्रगति', progressNote: 'स्कोर सिर्फ इसी कंप्यूटर के इसी ब्राउज़र में सेव होते हैं।',
       lessonsReady: 'पाठ तैयार', quizBest: 'क्विज़ का सबसे अच्छा स्कोर', notYet: 'अभी नहीं दिया', open: 'खोलें',
       sheetTitle: 'प्राइस शीट', sheetLead: 'यहां की फीस और अवधि इसी शीट से ली गई है। शीट बदले तो शीट को ही सही मानें।', viewSheet: 'पूरी प्राइस शीट खोलें',
@@ -203,8 +203,12 @@ window.Shell = (function () {
   }
 
   const NAV = [
-    ['index.html', 'home', 'navHome'], ['walk-in-desk.html', 'storefront', 'navDesk'], ['courses.html', 'school', 'navCourses'],
-    ['questions.html', 'forum', 'navQuestions'], ['practice.html', 'mic', 'navPractice']
+    ['index.html', 'home', 'navHome'],
+    ['walk-in-desk.html', 'storefront', 'navDesk'],
+    ['courses.html', 'school', 'navCourses'],
+    ['questions.html', 'forum', 'navQuestions'],
+    ['practice.html', 'mic', 'navPractice'],
+    ['enquiry.html', 'contact_support', 'navEnquiry']
   ];
 
   function renderHeader() {

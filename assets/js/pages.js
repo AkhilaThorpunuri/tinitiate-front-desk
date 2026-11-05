@@ -7,6 +7,8 @@
 
   const R = window.RT, Shell = window.Shell, { t, pick, esc, money } = Shell;
   const POSTER = 'Future-Ready%20Skills%20Training%20Poster.png';
+  const POSTER_DEMO = 'demo-classes-poster.jpg';
+  const POSTER_ENQUIRY = 'student-enquiry-qr.png';
   const main = () => document.getElementById('rtMain');
   const courseOf = id => R.COURSES.find(c => c.id === id);
 
@@ -21,15 +23,13 @@
 
   // Hearing a script needs a voice for the language; the practice page handles that case
   function home() {
-    const lessons = R.lessons();
-    const meters = Shell.LANGS.map(l => {
-      const done = lessons.filter(x => (Shell.getBest(x.id, l.id) || 0) >= Shell.READY_SCORE).length;
-      return `<div class="rt-meter">
-        <div><b lang="${l.id}">${l.label}</b><span>${done} / ${lessons.length} ${esc(t('lessonsReady'))}</span></div>
-        <div class="rt-bar-track"><span style="width:${(done / lessons.length) * 100}%"></span></div>
-      </div>`;
-    }).join('');
-    const steps = [['walk-in-desk.html', 'storefront', 'p1'], ['courses.html', 'school', 'p2'], ['questions.html', 'forum', 'p3'], ['practice.html', 'mic', 'p4']];
+    const steps = [
+      ['walk-in-desk.html', 'storefront', 'p1'],
+      ['courses.html', 'school', 'p2'],
+      ['questions.html', 'forum', 'p3'],
+      ['practice.html', 'mic', 'p4'],
+      ['enquiry.html', 'contact_support', 'p5']
+    ];
     main().innerHTML = `
       <header class="rt-hero">
         <span class="rt-kicker"><span class="msr">support_agent</span>${esc(t('homeKicker'))}</span>
@@ -43,18 +43,29 @@
           ${steps.map(([href, icon, key], i) => `<li><a href="${href}"><span class="rt-num">${i + 1}</span><span class="rt-path-text"><b>${esc(t(key))}</b><small>${esc(t(key + 'd'))}</small></span><span class="msr">${icon}</span></a></li>`).join('')}
         </ol>
       </section>
-      <div class="rt-two">
-        <section class="rt-section">
-          <h2><span class="msr">monitoring</span>${esc(t('progressTitle'))}</h2>
-          ${meters}
-          <p class="rt-note">${esc(t('progressNote'))}</p>
-        </section>
-        <section class="rt-section">
-          <h2><span class="msr">sell</span>${esc(t('sheetTitle'))}</h2>
-          <a class="rt-poster" href="${POSTER}" target="_blank" rel="noopener"><img src="${POSTER}" alt="${esc(t('sheetTitle'))}" loading="lazy"></a>
-          <p class="rt-note">${esc(t('sheetLead'))}</p>
-        </section>
-      </div>`;
+      <section class="rt-section">
+        <div style="display: flex; flex-direction: column; gap: 2.5rem; max-width: 680px; margin: 0 auto; width: 100%;">
+          <div>
+            <h2><span class="msr">sell</span>${esc(t('sheetTitle'))}</h2>
+            <a class="rt-poster" href="${POSTER}" target="_blank" rel="noopener">
+              <img src="${POSTER}" alt="${esc(t('sheetTitle'))}" loading="lazy" style="max-width: 100%; max-height: 75vh; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px;">
+            </a>
+            <p class="rt-note">${esc(t('sheetLead'))}</p>
+          </div>
+          <div>
+            <h2><span class="msr">event</span>Live Demo Classes</h2>
+            <a class="rt-poster" href="${POSTER_DEMO}" target="_blank" rel="noopener">
+              <img src="${POSTER_DEMO}" alt="Free Live Demo Classes" loading="lazy" style="max-width: 100%; max-height: 75vh; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px;">
+            </a>
+          </div>
+          <div>
+            <h2><span class="msr">qr_code_scanner</span>Student Enquiry</h2>
+            <a class="rt-poster" href="${POSTER_ENQUIRY}" target="_blank" rel="noopener">
+              <img src="${POSTER_ENQUIRY}" alt="Student Enquiry QR" loading="lazy" style="max-width: 100%; max-height: 75vh; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px;">
+            </a>
+          </div>
+        </div>
+      </section>`;
   }
 
   function desk() {
@@ -189,6 +200,6 @@
     });
   }
 
-  const pages = { home, desk, courses, questions};
+  const pages = { home, desk, courses, questions };
   Shell.init(pages[document.body.dataset.page]);
 })();

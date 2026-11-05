@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinitiate Front Desk</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="assets/css/ramesh.css" />
+  <!-- Google Material Symbols Rounded for clean icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <style>
+    .msr {
+      font-family: 'Material Symbols Rounded', sans-serif !important;
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    .enquiry-container {
+      max-width: 980px;
+      margin: 1.5rem auto 3rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Blue Top Hero Banner matching Practice page */
+    .enquiry-hero-banner {
+      background: linear-gradient(135deg, #004fb6 0%, #006ce6 100%);
+      border-radius: 16px;
+      padding: 24px 28px;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 79, 182, 0.2);
+      margin-bottom: 1.5rem;
+    }
+    .enquiry-hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fbc02d;
+      color: #0f172a;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .enquiry-hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.02em;
+    }
+    .enquiry-hero-lead {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #e0edff;
+      margin: 0;
+    }
+
+    /* Search & Category Filter Card */
+    .enquiry-filter-card {
+      background: #ffffff;
+      padding: 18px 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+      margin-bottom: 1.5rem;
+    }
+    .enquiry-search-bar {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 16px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .enquiry-search-bar:focus {
+      background: #ffffff;
+      border-color: #0056b3;
+      box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
+    }
+    .enquiry-chips {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .enquiry-chip {
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 20px;
+      border: 1px solid #cbd5e1;
+      background: #f1f5f9;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+    }
+    .enquiry-chip:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .enquiry-chip.active {
+      background: #0056b3;
+      color: #ffffff;
+      border-color: #0056b3;
+    }
+
+    /* FAQ Card List */
+    .faq-item-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #0056b3;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+    .faq-item-card:hover {
+      border-left-color: #003e82;
+      box-shadow: 0 4px 8px -1px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+    .faq-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #0056b3;
+      background: #e0f2fe;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .faq-question {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    }
+    .faq-answer {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #475569;
+      margin: 0;
+      white-space: pre-line;
+    }
+    .faq-empty-state {
+      background: #ffffff;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      text-align: center;
+      color: #64748b;
+      padding: 3rem 1.5rem;
+      font-size: 15px;
+    }
+
+    /* Keyword Highlighter */
+    mark.faq-highlight {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body data-title="enquiryTitle">
+
+  <!-- Header injected by Shell -->
+  <header class="rt-head" id="rtHeader"></header>
+
+  <!-- Main Container -->
+  <main class="enquiry-container" id="rtMain"></main>
+
+  <!-- Footer injected by Shell -->
+  <footer class="rt-foot" id="rtFooter"></footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/shell.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      // 43 Official Q&As across Placement, Fees, and Training
+      const OFFICIAL_ENQUIRIES = [
+        /* ================= 1. PLACEMENT ASSISTANCE (15 Questions) ================= */
+        {
+          id: "pl-1",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Does Tinitiate AI provide placement assistance?",
+            te: "Tinitiate AI ప్లేస్‌మెంట్ సహాయాన్ని అందిస్తుందా?",
+            hi: "क्या Tinitiate AI प्लेसमेंट सहायता प्रदान करता है?"
+          },
+          answer: {
+            en: "Yes. Tinitiate AI provides placement assistance as part of both Beginner Training and Professional Training programs.",
+            te: "అవును. Tinitiate AI బిగినర్ ట్రైనింగ్ మరియు ప్రొఫెషనల్ ట్రైనింగ్ ప్రోగ్రామ్‌లు రెండింటిలోనూ భాగంగా ప్లేస్‌మెంట్ సహాయాన్ని అందిస్తుంది.",
+            hi: "हाँ। Tinitiate AI बिगिनर ट्रेनिंग और प्रोफेशनल ट्रेनिंग दोनों प्रोग्राम्स के हिस्से के रूप में प्लेसमेंट सहायता प्रदान करता है।"
+          },
+          tags: ["placement", "assistance", "support", "beginner", "professional"]
+        },
+        {
+          id: "pl-2",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Is placement assistance included in the course fee?",
+            te: "కోర్సు ఫీజులోనే ప్లేస్‌మెంట్ సహాయం చేర్చబడిందా?",
+            hi: "क्या प्लेसमेंट सहायता कोर्स फीस में शामिल है?"
+          },
+          answer: {
+            en: "Yes. Placement assistance is included along with training support such as live interactive sessions, real-time project experience, resume building support, mock interviews, hands-on projects, and interview preparation.",
+            te: "అవును. లైవ్ ఇంటరాక్టివ్ సెషన్‌లు, రియల్-టైమ్ ప్రాజెక్ట్ అనుభవం, రెజ్యూమ్ తయారీ మద్దతు, మాక్ ఇంటర్వ్యూలు, హ్యాండ్స్-ఆన్ ప్రాజెక్ట్‌లు మరియు ఇంటర్వ్యూ ప్రిపరేషన్ వంటి ట్రైనింగ్ సపోర్ట్‌తో పాటే ప్లేస్‌మెంట్ సహాయం కూడా ఫీజులో చేర్చబడింది.",
+            hi: "हाँ। लाइव इंटरेक्टिव सेशन, रियल-टाइम प्रोजेक्ट अनुभव, रेज़्युमे सपोर्ट, मॉक इंटरव्यू, हैंड्स-ऑन प्रोजेक्ट्स और इंटरव्यू की तैयारी जैसी ट्रेनिंग सहायता के साथ प्लेसमेंट सहायता भी शामिल है।"
+          },
+          tags: ["fee", "included", "mock interviews", "resume", "projects"]
+        },
+        {
+          id: "pl-3",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "What type of placement support is provided?",
+            te: "ఎటువంటి ప్లేస్‌మెంట్ మద్దతు అందించబడుతుంది?",
+            hi: "किस प्रकार का प्लेसमेंट सपोर्ट दिया जाता है?"
+          },
+          answer: {
+            en: "Tinitiate AI supports learners through resume building, mock interviews, interview preparation, real-time project experience, and practical hands-on training, which helps students become more job-ready.",
+            te: "Tinitiate AI విద్యార్థులకు రెజ్యూమ్ తయారీ, మాక్ ఇంటర్వ్యూలు, ఇంటర్వ్యూ ప్రిపరేషన్, రియల్-టైమ్ ప్రాజెక్ట్ అనుభవం మరియు ప్రాక్టికల్ హ్యాండ్స్-ఆన్ ట్రైనింగ్ ద్వారా పూర్తి మద్దతు అందిస్తుంది, ఇది విద్యార్థులను జాబ్-రెడీగా మార్చడంలో సహాయపడుతుంది.",
+            hi: "Tinitiate AI रेज़्युमे बिल्डिंग, मॉक इंटरव्यू, इंटरव्यू की तैयारी, रियल-टाइम प्रोजेक्ट अनुभव और प्रैक्टिकल हैंड्स-ऑन ट्रेनिंग के माध्यम से छात्रों की मदद करता है, जिससे वे जॉब-रेडी बनते हैं।"
+          },
+          tags: ["support", "job-ready", "mock interviews", "practical", "resume"]
+        },
+        {
+          id: "pl-4",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Does Tinitiate AI guarantee a job?",
+            te: "Tinitiate AI ఉద్యోగ గ్యారెంటీ ఇస్తుందా?",
+            hi: "क्या Tinitiate AI नौकरी की गारंटी देता है?"
+          },
+          answer: {
+            en: "Tinitiate AI provides placement assistance, resume support, mock interviews, and interview preparation. Placement assistance means support and guidance for job readiness, but a final job offer depends on the student’s skills, interview performance, company requirements, and hiring process.",
+            te: "Tinitiate AI ప్లేస్‌మెంట్ సహాయం, రెజ్యూమ్ సపోర్ట్, మాక్ ఇంటర్వ్యూలు మరియు ఇంటర్వ్యూ ప్రిపరేషన్‌ను అందిస్తుంది. ప్లేస్‌మెంట్ సహాయం అంటే ఉద్యోగానికి సిద్ధం కావడానికి మద్దతు మరియు మార్గదర్శకత్వం ఇవ్వడం. తుది ఉద్యోగ ఆఫర్ అనేది విద్యార్థి నైపుణ్యాలు, ఇంటర్వ్యూ పనితీరు, కంపెనీ అవసరాలు మరియు నియామక ప్రక్రియపై ఆధారపడి ఉంటుంది.",
+            hi: "Tinitiate AI प्लेसमेंट सहायता, रेज़्युमे सपोर्ट, मॉक इंटरव्यू और इंटरव्यू की तैयारी प्रदान करता है। प्लेसमेंट सहायता का अर्थ जॉब रेडीनेस के लिए मार्गदर्शन है, लेकिन अंतिम जॉब ऑफर छात्र के कौशल, इंटरव्यू प्रदर्शन, कंपनी की आवश्यकताओं और चयन प्रक्रिया पर निर्भर करता है।"
+          },
+          tags: ["job guarantee", "placement assistance", "job offer", "skills"]
+        },
+        {
+          id: "pl-5",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Are mock interviews included?",
+            te: "మాక్ ఇంటర్వ్యూలు చేర్చబడ్డాయా?",
+            hi: "क्या मॉक इंटरव्यू शामिल हैं?"
+          },
+          answer: {
+            en: "Yes. Mock interviews are included in both Beginner and Professional Training programs to help students practice and improve their interview confidence.",
+            te: "అవును. విద్యార్థులు ఇంటర్వ్యూను ప్రాక్టీస్ చేయడానికి మరియు వారి విశ్వాసాన్ని పెంచుకోవడానికి బిగినర్ మరియు ప్రొఫెషనల్ ట్రైనింగ్ ప్రోగ్రామ్‌లు రెండింటిలోనూ మాక్ ఇంటర్వ్యూలు చేర్చబడ్డాయి.",
+            hi: "हाँ। छात्रों को अभ्यास कराने और इंटरव्यू के आत्मविश्वास को बढ़ाने के लिए बिगिनर और प्रोफेशनल दोनों ट्रेनिंग प्रोग्राम्स में मॉक इंटरव्यू शामिल हैं।"
+          },
+          tags: ["mock interviews", "confidence", "practice", "beginner", "professional"]
+        },
+        {
+          id: "pl-6",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Will Tinitiate AI help with resume preparation?",
+            te: "Tinitiate AI రెజ్యూమ్ తయారీలో సహాయపడుతుందా?",
+            hi: "क्या Tinitiate AI रेज़्युमे तैयार करने में मदद करेगा?"
+          },
+          answer: {
+            en: "Yes. Resume building support is included as part of the training and placement assistance process.",
+            te: "అవును. శిక్షణ మరియు ప్లేస్‌మెంట్ సహాయ ప్రక్రియలో భాగంగా రెజ్యూమ్ బిల్డింగ్ సపోర్ట్ అందించబడుతుంది.",
+            hi: "हाँ। ट्रेनिंग और प्लेसमेंट सहायता प्रक्रिया के हिस्से के रूप में रेज़्युमे बिल्डिंग सपोर्ट शामिल है।"
+          },
+          tags: ["resume", "preparation", "building", "cv"]
+        },
+        {
+          id: "pl-7",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Does the training include interview preparation?",
+            te: "శిక్షణలో ఇంటర్వ్యూ ప్రిపరేషన్ ఉంటుందా?",
+            hi: "क्या ट्रेनिंग में इंटरव्यू की तैयारी शामिल है?"
+          },
+          answer: {
+            en: "Yes. Both Beginner and Professional Training courses include hands-on projects and interview preparation.",
+            te: "అవును. బిగినర్ మరియు ప్రొఫెషనల్ ట్రైనింగ్ కోర్సులు రెండింటిలోనూ హ్యాండ్స్-ఆన్ ప్రాజెక్ట్‌లు మరియు ఇంటర్వ్యూ ప్రిపరేషన్ ఉంటాయి.",
+            hi: "हाँ। बिगिनर और प्रोफेशनल दोनों ट्रेनिंग कोर्सेस में हैंड्स-ऑन प्रोजेक्ट्स और इंटरव्यू की तैयारी शामिल है।"
+          },
+          tags: ["interview preparation", "projects", "beginner", "professional"]
+        },
+        {
+          id: "pl-8",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "How do real-time projects help in placements?",
+            te: "ప్లేస్‌మెంట్ల కోసం రియల్-టైమ్ ప్రాజెక్ట్‌లు ఎలా సహాయపడతాయి?",
+            hi: "प्लेसमेंट में रियल-टाइम प्रोजेक्ट्स कैसे मदद करते हैं?"
+          },
+          answer: {
+            en: "Real-time project experience helps students understand practical implementation, build confidence, improve resumes, and explain project work during interviews. Tinitiate AI training includes real-time project experience as part of the learning process.",
+            te: "రియల్-టైమ్ ప్రాజెక్ట్ అనుభవం విద్యార్థులకు ప్రాక్టికల్ అమలును అర్థం చేసుకోవడానికి, ఆత్మవిశ్వాసాన్ని పెంపొందించడానికి, రెజ్యూమ్‌ను మెరుగుపరచడానికి మరియు ఇంటర్వ్యూల సమయంలో ప్రాజెక్ట్ పనిని చక్కగా వివరించడానికి సహాయపడుతుంది. Tinitiate AI శిక్షణ అభ్యాస ప్రక్రియలో భాగంగా రియల్-టైమ్ ప్రాజెక్ట్ అనుభవాన్ని అందిస్తుంది.",
+            hi: "रियल-टाइम प्रोजेक्ट अनुभव से छात्रों को प्रैक्टिकल काम समझने, आत्मविश्वास बढ़ाने, रेज़्युमे मजबूत करने और इंटरव्यू में प्रोजेक्ट समझाने में मदद मिलती है। Tinitiate AI ट्रेनिंग में यह अनुभव सीखने की प्रक्रिया का मुख्य हिस्सा है।"
+          },
+          tags: ["real-time projects", "practical", "resume", "confidence"]
+        },
+        {
+          id: "pl-9",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Is placement assistance available for Beginner Training students?",
+            te: "బిగినర్ ట్రైనింగ్ విద్యార్థులకు కూడా ప్లేస్‌మెంట్ సహాయం అందుబాటులో ఉందా?",
+            hi: "क्या बिगिनर ट्रेनिंग के छात्रों के लिए प्लेसमेंट सहायता उपलब्ध है?"
+          },
+          answer: {
+            en: "Yes. Beginner Training courses also include placement assistance, resume building support, mock interviews, and interview preparation.",
+            te: "అవును. బిగినర్ ట్రైనింగ్ కోర్సుల్లో కూడా ప్లేస్‌మెంట్ సహాయం, రెజ్యూమ్ బిల్డింగ్ సపోర్ట్, మాక్ ఇంటర్వ్యూలు మరియు ఇంటర్వ్యూ ప్రిపరేషన్ చేర్చబడ్డాయి.",
+            hi: "हाँ। बिगिनर ट्रेनिंग कोर्सेस में भी प्लेसमेंट सहायता, रेज़्युमे सपोर्ट, मॉक इंटरव्यू और इंटरव्यू की तैयारी शामिल है।"
+          },
+          tags: ["beginner", "placement assistance", "resume", "mock"]
+        },
+        {
+          id: "pl-10",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Is placement assistance available for Professional Training students?",
+            te: "ప్రొఫెషనల్ ట్రైనింగ్ విద్యార్థులకు ప్లేస్‌మెంట్ సహాయం అందుబాటులో ఉందా?",
+            hi: "क्या प्रोफेशनल ट्रेनिंग के छात्रों के लिए प्लेसमेंट सहायता उपलब्ध है?"
+          },
+          answer: {
+            en: "Yes. Professional Training courses include placement assistance along with real-time project experience, resume support, mock interviews, and interview preparation.",
+            te: "అవును. ప్రొఫెషనల్ ట్రైనింగ్ కోర్సులలో రియల్-టైమ్ ప్రాజెక్ట్ అనుభవం, రెజ్యూమ్ సపోర్ట్, మాక్ ఇంటర్వ్యూలు మరియు ఇంటర్వ్యూ ప్రిపరేషన్‌తో పాటు ప్లేస్‌మెంట్ సహాయం కూడా ఉంటుంది.",
+            hi: "हाँ। प्रोफेशनल ट्रेनिंग कोर्सेस में रियल-टाइम प्रोजेक्ट अनुभव, रेज़्युमे सपोर्ट, मॉक इंटरव्यू और इंटरव्यू की तैयारी के साथ प्लेसमेंट सहायता शामिल है।"
+          },
+          tags: ["professional", "placement assistance", "projects", "interview"]
+        },
+        {
+          id: "pl-11",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Who can benefit from placement assistance?",
+            te: "ఈ ప్లేస్‌మెంట్ సహాయం ద్వారా ఎవరు ప్రయోజనం పొందవచ్చు?",
+            hi: "प्लेसमेंट सहायता से किसे लाभ मिल सकता है?"
+          },
+          answer: {
+            en: "Placement assistance is useful for students, freshers, beginners, career starters, and professionals who want to improve their job readiness through practical training, resume preparation, and interview practice.",
+            te: "ప్రాక్టికల్ ట్రైనింగ్, రెజ్యూమ్ ప్రిపరేషన్ మరియు ఇంటర్వ్యూ ప్రాక్టీస్ ద్వారా ఉద్యోగానికి సిద్ధం కావాలనుకునే విద్యార్థులు, ఫ్రెషర్లు, బిగినర్లు, కెరీర్ స్టార్టర్లు మరియు వర్కింగ్ ప్రొఫెషనల్స్ అందరికీ ప్లేస్‌మెంట్ సహాయం చాలా ఉపయోగకరంగా ఉంటుంది.",
+            hi: "प्रैक्टिकल ट्रेनिंग, रेज़्युमे तैयारी और इंटरव्यू अभ्यास के माध्यम से जॉब रेडी बनने के इच्छुक छात्रों, फ्रेशर्स, बिगिनर्स और प्रोफेशनल्स सभी के लिए यह सहायता उपयोगी है।"
+          },
+          tags: ["who can benefit", "students", "freshers", "professionals"]
+        },
+        {
+          id: "pl-12",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Will students get support for job interviews?",
+            te: "విద్యార్థులకు జాబ్ ఇంటర్వ్యూల కోసం సపోర్ట్ లభిస్తుందా?",
+            hi: "क्या छात्रों को जॉब इंटरव्यू के लिए सपोर्ट मिलेगा?"
+          },
+          answer: {
+            en: "Yes. Students get support through interview preparation and mock interviews, helping them prepare for technical and job-related interview rounds.",
+            te: "అవును. విద్యార్థులకు ఇంటర్వ్యూ ప్రిపరేషన్ మరియు మాక్ ఇంటర్వ్యూల ద్వారా పూర్తి మద్దతు లభిస్తుంది, ఇది వారు టెక్నికల్ మరియు జాబ్ రౌండ్లకు సిద్ధం కావడానికి తోడ్పడుతుంది.",
+            hi: "हाँ। छात्रों को इंटरव्यू की तैयारी और मॉक इंटरव्यू के जरिए सपोर्ट मिलता है, जिससे वे टेक्निकल और जॉब राउंड्स के लिए बेहतर तैयारी कर पाते हैं।"
+          },
+          tags: ["job interviews", "technical rounds", "support"]
+        },
+        {
+          id: "pl-13",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "Does placement assistance start after course completion?",
+            te: "ప్లేస్‌మెంట్ సహాయం కోర్సు పూర్తయిన తర్వాతే ప్రారంభమవుతుందా?",
+            hi: "क्या प्लेसमेंट सहायता कोर्स पूरा होने के बाद शुरू होती है?"
+          },
+          answer: {
+            en: "Placement support is connected with the training process through resume building, mock interviews, interview preparation, and project-based learning. Students can use this support to prepare for opportunities during or after training.",
+            te: "ప్లేస్‌మెంట్ సపోర్ట్ అనేది రెజ్యూమ్ బిల్డింగ్, మాక్ ఇంటర్వ్యూలు, ఇంటర్వ్యూ ప్రిపరేషన్ మరియు ప్రాజెక్ట్-ఆధారిత అభ్యాసం ద్వారా శిక్షణ ప్రక్రియతో కలిసి కొనసాగుతుంది. విద్యార్థులు శిక్షణ సమయంలో లేదా పూర్తయిన తర్వాత వచ్చే అవకాశాల కోసం దీనిని ఉపయోగించుకోవచ్చు.",
+            hi: "प्लेसमेंट सपोर्ट रेज़्युमे बिल्डिंग, मॉक इंटरव्यू, इंटरव्यू तैयारी और प्रोजेक्ट लर्निंग के जरिए ट्रेनिंग प्रोसेस से सीधे जुड़ा हुआ है। छात्र ट्रेनिंग के दौरान या बाद में अवसरों की तैयारी के लिए इसका उपयोग कर सकते हैं।"
+          },
+          tags: ["timing", "during training", "after course", "start"]
+        },
+        {
+          id: "pl-14",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "What should students do to improve placement chances?",
+            te: "ప్లేస్‌మెంట్ అవకాశాలను పెంచుకోవడానికి విద్యార్థులు ఏమి చేయాలి?",
+            hi: "प्लेसमेंट के अवसर बढ़ाने के लिए छात्रों को क्या करना चाहिए?"
+          },
+          answer: {
+            en: "Students should attend live sessions regularly, complete hands-on projects, prepare their resume properly, practice mock interviews, revise technical concepts, and actively apply for suitable job opportunities.",
+            te: "విద్యార్థులు లైవ్ క్లాసులకు క్రమం తప్పకుండా హాజరుకావాలి, ప్రాజెక్ట్‌లను పూర్తి చేయాలి, రెజ్యూమ్‌ను సరిగ్గా సిద్ధం చేసుకోవాలి, మాక్ ఇంటర్వ్యూలను సాధన చేయాలి, టెక్నికల్ కాన్సెప్ట్‌లను పునఃసమీక్షించాలి మరియు తగిన ఉద్యోగ అవకాశాల కోసం చురుకుగా దరఖాస్తు చేసుకోవాలి.",
+            hi: "छात्रों को नियमित रूप से लाइव सेशन में भाग लेना चाहिए, प्रोजेक्ट्स पूरे करने चाहिए, अच्छा रेज़्युमे तैयार करना चाहिए, मॉक इंटरव्यू का अभ्यास करना चाहिए, टेक्निकल कॉन्सेप्ट्स दोहराने चाहिए और उपयुक्त जॉब्स के लिए आवेदन करना चाहिए।"
+          },
+          tags: ["improve chances", "practice", "projects", "apply"]
+        },
+        {
+          id: "pl-15",
+          category: { en: "Placement Assistance", te: "ప్లేస్‌మెంట్ సహాయం", hi: "प्लेसमेंट सहायता" },
+          question: {
+            en: "How can students contact Tinitiate AI for placement assistance details?",
+            te: "ప్లేస్‌మెంట్ సహాయ వివరాల కోసం విద్యార్థులు Tinitiate AIని ఎలా సంప్రదించవచ్చు?",
+            hi: "प्लेसमेंट सहायता की जानकारी के लिए छात्र Tinitiate AI से कैसे संपर्क कर सकते हैं?"
+          },
+          answer: {
+            en: "Students can contact Tinitiate AI for course and placement assistance details.\nWhatsApp: +91 6309123485\nEmail: contact@tinitiateai.com\nWebsite: tinitiateai.com",
+            te: "కోర్సు మరియు ప్లేస్‌మెంట్ సహాయ వివరాల కోసం విద్యార్థులు Tinitiate AIని సంప్రదించవచ్చు:\nవాట్సాప్: +91 6309123485\nఈమెయిల్: contact@tinitiateai.com\nవెబ్‌సైట్: tinitiateai.com",
+            hi: "छात्र कोर्स और प्लेसमेंट सहायता की जानकारी के लिए Tinitiate AI से संपर्क कर सकते हैं:\nव्हाट्सएप: +91 6309123485\nईमेल: contact@tinitiateai.com\nवेबसाइट: tinitiateai.com"
+          },
+          tags: ["contact", "whatsapp", "email", "website"]
+        },
+
+        /* ================= 2. FEE RELATED SECTION (10 Questions) ================= */
+        {
+          id: "fe-1",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "What is the fee for Beginner Training courses at Tinitiate AI?",
+            te: "Tinitiate AI లో బిగినర్ ట్రైనింగ్ కోర్సుల ఫీజు ఎంత?",
+            hi: "Tinitiate AI में बिगिनर ट्रेनिंग कोर्सेस की फीस कितनी है?"
+          },
+          answer: {
+            en: "The regular fee for Beginner Training courses is ₹15,000, and the current special discount price is ₹10,000 only. This applies to beginner courses such as Java Basics, Python, JavaScript / HTML / CSS, TypeScript, SQL, and Data Structures.",
+            te: "బిగినర్ ట్రైనింగ్ కోర్సుల సాధారణ ఫీజు ₹15,000, మరియు ప్రస్తుత ప్రత్యేక తగ్గింపు ధర కేవలం ₹10,000 మాత్రమే. ఇది జావా బేసిక్స్, పైథాన్, జావాస్క్రిప్ట్ / HTML / CSS, టైప్‌స్క్రిప్ట్, SQL మరియు డేటా స్ట్రక్చర్స్ వంటి బిగినర్ కోర్సులకు వర్తిస్తుంది.",
+            hi: "बिगिनर ट्रेनिंग कोर्सेस की सामान्य फीस ₹15,000 है, और वर्तमान विशेष डिस्काउंट मूल्य केवल ₹10,000 है। यह जावा बेसिक्स, पायथन, जावास्क्रिप्ट / HTML / CSS, टाइपस्क्रिप्ट, SQL और डेटा स्ट्रक्चर्स जैसे कोर्स पर लागू है।"
+          },
+          tags: ["beginner fee", "discount", "10000", "15000", "python", "java", "sql"]
+        },
+        {
+          id: "fe-2",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "What is the fee for Professional Training courses?",
+            te: "ప్రొఫెషనల్ ట్రైనింగ్ కోర్సుల ఫీజు ఎంత?",
+            hi: "प्रोफेशनल ट्रेनिंग कोर्सेस की फीस कितनी है?"
+          },
+          answer: {
+            en: "The regular fee for Professional Training courses is ₹45,000, and the current special discount price is ₹35,000 only. Professional courses include programs such as Java Full Stack, React Web Development, Next.js, Angular + .NET, AWS Data Engineering, Snowflake Data Engineering, Azure Data Engineering, GCP Data Engineering, and Visualization.",
+            te: "ప్రొఫెషనల్ ట్రైనింగ్ కోర్సుల సాధారణ ఫీజు ₹45,000, మరియు ప్రస్తుత ప్రత్యేక తగ్గింపు ధర కేవలం ₹35,000 మాత్రమే. ప్రొఫెషనల్ కోర్సులలో జావా ఫుల్ స్టాక్, రియాక్ట్ వెబ్ డెవలప్‌మెంట్, నెక్స్ట్.జేఎస్, యాంగులర్ + .NET, AWS డేటా ఇంజనీరింగ్, స్నోఫ్లేక్ డేటా ఇంజనీరింగ్, అజూర్ డేటా ఇంజనీరింగ్, GCP డేటా ఇంజనీరింగ్ మరియు విజువలైజేషన్ వంటి ప్రోగ్రామ్‌లు ఉన్నాయి.",
+            hi: "प्रोफेशनल ट्रेनिंग कोर्सेस की सामान्य फीस ₹45,000 है, और वर्तमान विशेष डिस्काउंट मूल्य केवल ₹35,000 है। इसमें जावा फुल स्टैक, रिएक्ट वेब डेवलपमेंट, नेक्स्ट.जेएस, एंगुलर + .NET, एडब्ल्यूएस डेटा इंजीनियरिंग, स्नोफ्लेक, अज़ूर, जीसीपी और विज़ुअलाइज़ेशन शामिल हैं।"
+          },
+          tags: ["professional fee", "35000", "45000", "full stack", "data engineering", "react"]
+        },
+        {
+          id: "fe-3",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "What is included in the course fee?",
+            te: "కోర్సు ఫీజులో ఏమేమి చేర్చబడ్డాయి?",
+            hi: "कोर्स फीस में क्या-क्या शामिल है?"
+          },
+          answer: {
+            en: "The course fee includes live interactive sessions, real-time project experience, resume building support, mock interviews, placement assistance, hands-on projects, and interview preparation.",
+            te: "కోర్సు ఫీజులో లైవ్ ఇంటరాక్టివ్ సెషన్‌లు, రియల్-టైమ్ ప్రాజెక్ట్ అనుభవం, రెజ్యూమ్ తయారీ మద్దతు, మాక్ ఇంటర్వ్యూలు, ప్లేస్‌మెంట్ సహాయం, హ్యాండ్స్-ఆన్ ప్రాజెక్ట్‌లు మరియు ఇంటర్వ్యూ ప్రిపరేషన్ చేర్చబడ్డాయి.",
+            hi: "कोर्स फीस में लाइव इंटरेक्टिव सेशन, रियल-टाइम प्रोजेक्ट अनुभव, रेज़्युमे सपोर्ट, मॉक इंटरव्यू, प्लेसमेंट सहायता, हैंड्स-ऑन प्रोजेक्ट्स और इंटरव्यू की तैयारी शामिल है।"
+          },
+          tags: ["included", "benefits", "live sessions", "placement assistance"]
+        },
+        {
+          id: "fe-4",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "Is there any discount available?",
+            te: "ఏదైనా తగ్గింపు (డిస్కౌంట్) అందుబాటులో ఉందా?",
+            hi: "क्या कोई डिस्काउंट उपलब्ध है?"
+          },
+          answer: {
+            en: "Yes. Tinitiate AI currently offers special discount prices:\nBeginner Training: ₹15,000 → ₹10,000 only\nProfessional Training: ₹45,000 → ₹35,000 only",
+            te: "అవును. Tinitiate AI ప్రస్తుతం ప్రత్యేక తగ్గింపు ధరలను అందిస్తోంది:\nబిగినర్ ట్రైనింగ్: ₹15,000 → కేవలం ₹10,000 మాత్రమే\nప్రొఫెషనల్ ట్రైనింగ్: ₹45,000 → కేవలం ₹35,000 మాత్రమే",
+            hi: "हाँ। Tinitiate AI वर्तमान में विशेष डिस्काउंट मूल्य प्रदान कर रहा है:\nबिगिनर ट्रेनिंग: ₹15,000 → केवल ₹10,000\nप्रोफेशनल ट्रेनिंग: ₹45,000 → केवल ₹35,000"
+          },
+          tags: ["discount", "offer", "special price", "10000", "35000"]
+        },
+        {
+          id: "fe-5",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "Are the classes online or offline?",
+            te: "క్లాసులు ఆన్‌లైన్‌లో ఉంటాయా లేదా ఆఫ్‌లైన్‌లోనా?",
+            hi: "क्लासेज ऑनलाइन होती हैं या ऑफलाइन?"
+          },
+          answer: {
+            en: "The listed training programs are offered in Remote / Online mode, so learners can attend from anywhere.",
+            te: "ఈ ట్రైనింగ్ ప్రోగ్రామ్‌లు రిమోట్ / ఆన్‌లైన్ మోడ్‌లో అందించబడుతున్నాయి, కాబట్టి విద్యార్థులు ఎక్కడి నుండైనా క్లాసులకు హాజరుకావచ్చు.",
+            hi: "यह ट्रेनिंग प्रोग्राम रिमोट / ऑनलाइन मोड में उपलब्ध हैं, इसलिए छात्र कहीं से भी क्लास अटेंड कर सकते हैं।"
+          },
+          tags: ["online", "offline", "remote", "mode"]
+        },
+        {
+          id: "fe-6",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "Who will teach the courses?",
+            te: "ఈ కోర్సులను ఎవరు బోధిస్తారు?",
+            hi: "कोर्सेस कौन पढ़ाएगा?"
+          },
+          answer: {
+            en: "The courses are handled by industry-experienced professionals, helping students learn with practical and job-focused guidance.",
+            te: "ఈ కోర్సులను ఐటీ పరిశ్రమలో అనుభవం ఉన్న నిపుణులు నిర్వహిస్తారు, ఇది విద్యార్థులకు ప్రాక్టికల్ మరియు జాబ్-ఓరియెంటెడ్ మార్గదర్శకత్వాన్ని అందిస్తుంది.",
+            hi: "कोर्सेस इंडस्ट्री के अनुभवी प्रोफेशनल्स द्वारा पढ़ाए जाते हैं, जिससे छात्रों को प्रैक्टिकल और करियर-ओरिएंटेड मार्गदर्शन मिलता है।"
+          },
+          tags: ["faculty", "instructors", "trainers", "professionals"]
+        },
+        {
+          id: "fe-7",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "Do the fees include interview preparation?",
+            te: "ఫీజులో ఇంటర్వ్యూ ప్రిపరేషన్ చేర్చబడిందా?",
+            hi: "क्या फीस में इंटरव्यू की तैयारी शामिल है?"
+          },
+          answer: {
+            en: "Yes. Both Beginner and Professional Training programs include hands-on projects and interview preparation.",
+            te: "అవును. బిగినర్ మరియు ప్రొఫెషనల్ ట్రైనింగ్ ప్రోగ్రామ్‌లు రెండింటిలోనూ హ్యాండ్స్-ఆన్ ప్రాజెక్ట్‌లు మరియు ఇంటర్వ్యూ ప్రిపరేషన్ కలిసి ఉంటాయి.",
+            hi: "हाँ। बिगिनर और प्रोफेशनल दोनों प्रोग्राम्स में हैंड्स-ऑन प्रोजेक्ट्स और इंटरव्यू की तैयारी शामिल है।"
+          },
+          tags: ["fees", "interview preparation", "included"]
+        },
+        {
+          id: "fe-8",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "फीस संबंधी" },
+          question: {
+            en: "Is placement assistance included in the fee?",
+            te: "ఫీజులో ప్లేస్‌మెంట్ సహాయం కలిసి ఉందా?",
+            hi: "क्या फीस में प्लेसमेंट सहायता शामिल है?"
+          },
+          answer: {
+            en: "Yes. Placement assistance is included as part of the training support. The courses also include resume building support and mock interviews.",
+            te: "అవును. శిక్షణ మద్దతులో భాగంగా ప్లేస్‌మెంట్ సహాయం చేర్చబడింది. కోర్సులలో రెజ్యూమ్ తయారీ మద్దతు మరియు మాక్ ఇంటర్వ్యూలు కూడా ఉంటాయి.",
+            hi: "हाँ। ट्रेनिंग सपोर्ट के तहत प्लेसमेंट सहायता शामिल है। कोर्सेस में रेज़्युमे सपोर्ट और मॉक इंटरव्यू भी शामिल हैं।"
+          },
+          tags: ["placement assistance", "fee", "included", "resume", "mock"]
+        },
+        {
+          id: "fe-9",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "ఫీస్ संबंधी" },
+          question: {
+            en: "Are seats limited?",
+            te: "సీట్లు పరిమితంగా ఉన్నాయా?",
+            hi: "क्या सीटें सीमित हैं?"
+          },
+          answer: {
+            en: "Yes. The course details mention limited seats available, so students are encouraged to enroll early.",
+            te: "అవును. కోర్సు వివరాల ప్రకారం సీట్లు పరిమితంగా ఉన్నాయి, కాబట్టి విద్యార్థులు త్వరగా ఎన్‌రోల్ చేసుకోవాల్సిందిగా సూచించడమైనది.",
+            hi: "हाँ। कोर्सेस में सीमित सीटें उपलब्ध हैं, इसलिए छात्रों को समय पर दाखिला लेने की सलाह दी जाती है।"
+          },
+          tags: ["seats", "limited seats", "enroll early"]
+        },
+        {
+          id: "fe-10",
+          category: { en: "Fee Related", te: "ఫీజు వివరాలు", hi: "ఫీస్ संबंधी" },
+          question: {
+            en: "How can students enroll?",
+            te: "విద్యార్థులు ఎలా ఎన్‌రోల్ చేసుకోవచ్చు?",
+            hi: "छात्र एडमिशन कैसे ले सकते हैं?"
+          },
+          answer: {
+            en: "Students can contact Tinitiate AI and enroll for the required course.\nWhatsApp: +91 6309123485\nEmail: contact@tinitiateai.com\nWebsite: tinitiateai.com",
+            te: "విద్యార్థులు Tinitiate AIని సంప్రదించి కావలసిన కోర్సులో ఎన్‌రోల్ చేసుకోవచ్చు:\nవాట్సాప్: +91 6309123485\nఈమెయిల్: contact@tinitiateai.com\nవెబ్‌సైట్: tinitiateai.com",
+            hi: "छात्र Tinitiate AI से संपर्क करके अपने पसंदीदा कोर्स में दाखिला ले सकते हैं:\nव्हाट्सएप: +91 6309123485\nईमेल: contact@tinitiateai.com\nवेबसाइट: tinitiateai.com"
+          },
+          tags: ["enroll", "contact", "whatsapp", "email"]
+        },
+
+        /* ================= 3. TRAINING RELATED (18 Questions) ================= */
+        {
+          id: "tr-1",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ट्रेनिंग प्रोग्राम्स" },
+          question: {
+            en: "What type of training does Tinitiate AI provide?",
+            te: "Tinitiate AI ఎటువంటి శిక్షణను అందిస్తుంది?",
+            hi: "Tinitiate AI किस प्रकार की ट्रेनिंग प्रदान करता है?"
+          },
+          answer: {
+            en: "Tinitiate AI provides IT training programs for both beginners and professionals. The training focuses on practical learning, hands-on projects, interview preparation, resume support, mock interviews, and placement assistance.",
+            te: "Tinitiate AI బిగినర్లు మరియు ప్రొఫెషనల్స్ ఇద్దరికీ IT ట్రైనింగ్ ప్రోగ్రామ్‌లను అందిస్తుంది. ఈ శిక్షణ ప్రాక్టికల్ లెర్నింగ్, హ్యాండ్స్-ఆన్ ప్రాజెక్ట్‌లు, ఇంటర్వ్యూ ప్రిపరేషన్, రెజ్యూమ్ సపోర్ట్, మాక్ ఇంటర్వ్యూలు మరియు ప్లేస్‌మెంట్ సహాయంపై దృష్టి పెడుతుంది.",
+            hi: "Tinitiate AI बिगिनर्स और प्रोफेशनल्स दोनों के लिए IT ट्रेनिंग प्रोग्राम प्रदान करता है। यह प्रैक्टिकल लर्निंग, प्रोजेक्ट्स, इंटरव्यू की तैयारी, रेज़्युमे सपोर्ट, मॉक इंटरव्यू और प्लेसमेंट सहायता पर केंद्रित है।"
+          },
+          tags: ["training type", "practical", "it training", "hands-on"]
+        },
+        {
+          id: "tr-2",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "What are the training categories available?",
+            te: "అందుబాటులో ఉన్న ట్రైనింగ్ విభాగాలు ఏమిటి?",
+            hi: "ट्रेनिंग की कौन-कौन सी कैटेगरी उपलब्ध हैं?"
+          },
+          answer: {
+            en: "Tinitiate AI offers two main training categories:\n1. Beginner Training — for students, freshers, and learners starting from basics.\n2. Professional Training — for learners who want job-focused, advanced, industry-level skills.",
+            te: "Tinitiate AI రెండు ప్రధాన ట్రైనింగ్ విభాగాలను అందిస్తుంది:\n1. బిగినర్ ట్రైనింగ్ — బేసిక్స్ నుండి ప్రారంభించే విద్యార్థులు, ఫ్రెషర్ల కోసం.\n2. ప్రొఫెషనల్ ట్రైనింగ్ — ఉద్యోగానికి ఉపయోగపడే అధునాతన, ఇండస్ట్రీ స్థాయి నైపుణ్యాలను కోరుకునే వారి కోసం.",
+            hi: "Tinitiate AI दो मुख्य श्रेणियां प्रदान करता है:\n1. बिगिनर ट्रेनिंग — बेसिक से शुरुआत करने वाले छात्रों और फ्रेशर्स के लिए।\n2. प्रोफेशनल ट्रेनिंग — जॉब-ओरिएंटेड और एडवांस इंडस्ट्री स्किल्स सीखने वालों के लिए।"
+          },
+          tags: ["categories", "beginner training", "professional training"]
+        },
+        {
+          id: "tr-3",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Which courses are available under Beginner Training?",
+            te: "బిగినర్ ట్రైనింగ్ కింద ఏయే కోర్సులు అందుబాటులో ఉన్నాయి?",
+            hi: "बिगिनर ट्रेनिंग के तहत कौन-कौन से कोर्स उपलब्ध हैं?"
+          },
+          answer: {
+            en: "Beginner Training includes courses such as Java Basics, Python, JavaScript / HTML / CSS, TypeScript, SQL, and Data Structures.",
+            te: "బిగినర్ ట్రైనింగ్‌లో జావా బేసిక్స్, పైథాన్, జావాస్క్రిప్ట్ / HTML / CSS, టైప్‌స్క్రిప్ట్, SQL మరియు డేటా స్ట్రక్చర్స్ వంటి కోర్సులు ఉన్నాయి.",
+            hi: "बिगिनर ट्रेनिंग में जावा बेसिक्स, पायथन, जावास्क्रिप्ट / HTML / CSS, टाइपस्क्रिप्ट, SQL और डेटा स्ट्रक्चर्स शामिल हैं।"
+          },
+          tags: ["beginner courses", "java", "python", "javascript", "sql", "data structures"]
+        },
+        {
+          id: "tr-4",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Which courses are available under Professional Training?",
+            te: "ప్రొఫెషనల్ ట్రైనింగ్ కింద ఏయే కోర్సులు అందుబాటులో ఉన్నాయి?",
+            hi: "प्रोफेशनल ट्रेनिंग के तहत कौन-कौन से कोर्स उपलब्ध हैं?"
+          },
+          answer: {
+            en: "Professional Training includes Java Full Stack Training, React Web Development, Next.js Web Development, Full Stack Angular + .NET, AWS Data Engineering, Snowflake Data Engineering, Azure Data Engineering, GCP Data Engineering, and Visualization.",
+            te: "ప్రొఫెషనల్ ట్రైనింగ్‌లో జావా ఫుల్ స్టాక్ ట్రైనింగ్, రియాక్ట్ వెబ్ డెవలప్‌మెంట్, నెక్స్ట్.జేఎస్ వెబ్ డెవలప్‌మెంట్, ఫుల్ స్టాక్ యాంగులర్ + .NET, AWS డేటా ఇంజనీరింగ్, స్నోఫ్లేక్ డేటా ఇంజనీరింగ్, అజూర్ డేటా ఇంజనీరింగ్, GCP డేటా ఇంజనీరింగ్ మరియు విజువలైజేషన్ ఉన్నాయి.",
+            hi: "प्रोफेशनल ट्रेनिंग में जावा फुल स्टैक, रिएक्ट वेब डेवलपमेंट, नेक्स्ट.जेएस, फुल स्टैक एंगुलर + .NET, AWS डेटा इंजीनियरिंग, स्नोफ्लेक, अज़ूर, GCP और विज़ुअलाइज़ेशन शामिल हैं।"
+          },
+          tags: ["professional courses", "full stack", "react", "nextjs", "aws", "snowflake", "azure"]
+        },
+        {
+          id: "tr-5",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Is the training online or offline?",
+            te: "శిక్షణ ఆన్‌లైన్‌లో ఉంటుందా లేదా ఆఫ్‌లైన్‌లోనా?",
+            hi: "ट्रेनिंग ऑनलाइन है या ऑफलाइन?"
+          },
+          answer: {
+            en: "The listed training programs are offered in Remote / Online mode, so students can attend the sessions from anywhere.",
+            te: "ఈ ట్రైనింగ్ ప్రోగ్రామ్‌లు రిమోట్ / ఆన్‌లైన్ మోడ్‌లో అందించబడుతున్నాయి, కాబట్టి విద్యార్థులు ఎక్కడి నుండైనా సెషన్‌లకు హాజరుకావచ్చు.",
+            hi: "यह ट्रेनिंग प्रोग्राम रिमोट / ऑनलाइन मोड में उपलब्ध हैं, इसलिए छात्र कहीं से भी क्लास अटेंड कर सकते हैं।"
+          },
+          tags: ["online", "offline", "remote", "mode"]
+        },
+        {
+          id: "tr-6",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Who conducts the training?",
+            te: "శిక్షణను ఎవరు నిర్వహిస్తారు?",
+            hi: "ट्रेनिंग कौन कराता है?"
+          },
+          answer: {
+            en: "The training is conducted by industry-experienced professionals, helping students learn with real-time and career-focused guidance.",
+            te: "ఈ శిక్షణ పరిశ్రమలో అపార అనుభవం ఉన్న నిపుణులచే నిర్వహించబడుతుంది, తద్వారా విద్యార్థులు రియల్-టైమ్ మరియు కెరీర్-ఓరియెంటెడ్ మార్గదర్శకత్వాన్ని పొందుతారు.",
+            hi: "ट्रेनिंग इंडस्ट्री के अनुभवी प्रोफेशनल्स द्वारा दी जाती है, जिससे छात्रों को प्रैक्टिकल और करियर-फोकस्ड मार्गदर्शन मिलता है।"
+          },
+          tags: ["instructors", "trainers", "industry professionals"]
+        },
+        {
+          id: "tr-7",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Does the training include live classes?",
+            te: "శిక్షణలో లైవ్ క్లాసులు ఉంటాయా?",
+            hi: "क्या ट्रेनिंग में लाइव क्लासेज शामिल हैं?"
+          },
+          answer: {
+            en: "Yes. Tinitiate AI training includes live interactive sessions, so students can learn directly from trainers and clarify doubts during the sessions.",
+            te: "అవును. Tinitiate AI ట్రైనింగ్‌లో లైవ్ ఇంటరాక్టివ్ సెషన్‌లు ఉంటాయి, తద్వారా విద్యార్థులు నేరుగా ట్రైనర్ల నుండి నేర్చుకోవచ్చు మరియు సెషన్ సమయంలోనే సందేహాలను నివృత్తి చేసుకోవచ్చు.",
+            hi: "हाँ। Tinitiate AI ट्रेनिंग में लाइव इंटरेक्टिव सेशन शामिल हैं, जिससे छात्र सीधे ट्रेनर से सीख सकते हैं और क्लास के दौरान डाउट पूछ सकते हैं।"
+          },
+          tags: ["live classes", "interactive", "doubts"]
+        },
+        {
+          id: "tr-8",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Will students get hands-on practice?",
+            te: "విద్యార్థులకు హ్యాండ్స్-ఆన్ ప్రాక్టీస్ లభిస్తుందా?",
+            hi: "क्या छात्रों को हैंड्स-ऑन प्रैक्टिस मिलेगी?"
+          },
+          answer: {
+            en: "Yes. The training includes hands-on projects and real-time project experience, helping learners understand practical implementation, not just theory.",
+            te: "అవును. శిక్షణలో హ్యాండ్స్-ఆన్ ప్రాజెక్ట్‌లు మరియు రియల్-టైమ్ ప్రాజెక్ట్ అనుభవం ఉంటాయి, ఇది కేవలం థియరీ మాత్రమే కాకుండా ప్రాక్టికల్ అమలును అర్థం చేసుకోవడంలో విద్యార్థులకు సహాయపడుతుంది.",
+            hi: "हाँ। ट्रेनिंग में हैंड्स-ऑन प्रोजेक्ट्स और रियल-टाइम प्रोजेक्ट अनुभव शामिल हैं, जिससे केवल थ्योरी ही नहीं बल्कि प्रैक्टिकल काम भी समझ आता है।"
+          },
+          tags: ["hands-on", "practice", "projects", "practical"]
+        },
+        {
+          id: "tr-9",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Is interview preparation included?",
+            te: "ఇంటర్వ్యూ ప్రిపరేషన్ చేర్చబడిందా?",
+            hi: "क्या इंटरव्यू की तैयारी शामिल है?"
+          },
+          answer: {
+            en: "Yes. Both Beginner and Professional Training programs include interview preparation and mock interviews to help students prepare for job opportunities.",
+            te: "అవును. విద్యార్థులు ఉద్యోగ అవకాశాలకు సిద్ధం కావడానికి బిగినర్ మరియు ప్రొఫెషనల్ ట్రైనింగ్ ప్రోగ్రామ్‌లు రెండింటిలోనూ ఇంటర్వ్యూ ప్రిపరేషన్ మరియు మాక్ ఇంటర్వ్యూలు చేర్చబడ్డాయి.",
+            hi: "हाँ। छात्रों को नौकरी के अवसरों के लिए तैयार करने हेतु बिगिनर और प्रोफेशनल दोनों प्रोग्राम्स में इंटरव्यू की तैयारी और मॉक इंटरव्यू शामिल हैं।"
+          },
+          tags: ["interview preparation", "mock interviews", "jobs"]
+        },
+        {
+          id: "tr-10",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Does Tinitiate AI provide resume building support?",
+            te: "Tinitiate AI రెజ్యూమ్ తయారీ మద్దతును అందిస్తుందా?",
+            hi: "क्या Tinitiate AI रेज़्युमे बनाने में मदद करता है?"
+          },
+          answer: {
+            en: "Yes. Resume building support is included as part of the training support, helping learners prepare a better job-ready profile.",
+            te: "అవును. విద్యార్థులు మెరుగైన జాబ్-రెడీ ప్రొఫైల్‌ను సిద్ధం చేసుకోవడానికి శిక్షణా మద్దతులో భాగంగా రెజ్యూమ్ బిల్డింగ్ సపోర్ట్ అందించబడుతుంది.",
+            hi: "हाँ। छात्रों को एक मजबूत और जॉब-रेडी प्रोफाइल तैयार करने में मदद के लिए ट्रेनिंग के साथ रेज़्युमे बिल्डिंग सपोर्ट दिया जाता है।"
+          },
+          tags: ["resume support", "job-ready profile", "cv"]
+        },
+        {
+          id: "tr-11",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Is placement assistance provided?",
+            te: "ప్లేస్‌మెంట్ సహాయం అందించబడుతుందా?",
+            hi: "क्या प्लेसमेंट सहायता प्रदान की जाती है?"
+          },
+          answer: {
+            en: "Yes. Tinitiate AI provides placement assistance along with training, resume support, and mock interview preparation.",
+            te: "అవును. Tinitiate AI శిక్షణతో పాటు రెజ్యూమ్ సపోర్ట్ మరియు మాక్ ఇంటర్వ్యూ ప్రిపరేషన్‌తో కూడిన ప్లేస్‌మెంట్ సహాయాన్ని అందిస్తుంది.",
+            hi: "हाँ। Tinitiate AI ट्रेनिंग, रेज़्युमे सपोर्ट और मॉक इंटरव्यू तैयारी के साथ प्लेसमेंट सहायता भी प्रदान करता है।"
+          },
+          tags: ["placement assistance", "support", "mock interview"]
+        },
+        {
+          id: "tr-12",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "What is the duration of Beginner Training?",
+            te: "బిగినర్ ట్రైనింగ్ వ్యవధి ఎంత?",
+            hi: "बिगिनर ट्रेनिंग की अवधि कितनी है?"
+          },
+          answer: {
+            en: "Beginner Training courses are offered with flexible timings, making them suitable for students, freshers, and working professionals.",
+            te: "బిగినర్ ట్రైనింగ్ కోర్సులు ఫ్లెక్సిబుల్ టైమింగ్స్‌తో అందించబడతాయి, ఇవి విద్యార్థులు, ఫ్రెషర్లు మరియు వర్కింగ్ ప్రొఫెషనల్స్‌కు అనుకూలంగా ఉంటాయి.",
+            hi: "बिगिनर ट्रेनिंग कोर्सेस लचीले समय (फ्लेक्सिबल टाइमिंग्स) के साथ उपलब्ध हैं, जो छात्रों, फ्रेशर्स और कामकाजी लोगों के लिए उपयुक्त हैं।"
+          },
+          tags: ["duration", "beginner", "flexible timings"]
+        },
+        {
+          id: "tr-13",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "What is the duration of Professional Training?",
+            te: "ప్రొఫెషనల్ ట్రైనింగ్ వ్యవధి ఎంత?",
+            hi: "प्रोफेशनल ट्रेनिंग की अवधि कितनी है?"
+          },
+          answer: {
+            en: "Professional Training courses are generally designed for 3 months.",
+            te: "ప్రొఫెషనల్ ట్రైనింగ్ కోర్సులు సాధారణంగా 3 నెలల కాలవ్యవధి కోసం రూపొందించబడ్డాయి.",
+            hi: "प्रोफेशनल ट्रेनिंग कोर्सेस आमतौर पर 3 महीने के लिए डिज़ाइन किए गए हैं।"
+          },
+          tags: ["duration", "professional", "3 months"]
+        },
+        {
+          id: "tr-14",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Can students attend from any location?",
+            te: "విద్యార్థులు ఏ ప్రాంతం నుంచైనా హాజరుకావచ్చా?",
+            hi: "क्या छात्र किसी भी स्थान से क्लास ले सकते हैं?"
+          },
+          answer: {
+            en: "Yes. Since the training mode is Remote / Online, students can attend from anywhere.",
+            te: "అవును. శిక్షణ రిమోట్ / ఆన్‌లైన్ మోడ్‌లో ఉన్నందున, విద్యార్థులు ఏ ప్రదేశం నుండైనా హాజరుకావచ్చు.",
+            hi: "हाँ। क्योंकि ट्रेनिंग मोड रिमोट / ऑनलाइन है, छात्र कहीं से भी क्लास अटेंड कर सकते हैं।"
+          },
+          tags: ["location", "remote", "online", "anywhere"]
+        },
+        {
+          id: "tr-15",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Is the training suitable for freshers?",
+            te: "ఈ శిక్షణ ఫ్రెషర్లకు సరిపోతుందా?",
+            hi: "क्या यह ट्रेनिंग फ्रेशर्स के लिए उपयुक्त है?"
+          },
+          answer: {
+            en: "Yes. Beginner courses are useful for freshers who want to build strong fundamentals, and professional courses are useful for learners who want to move toward job-focused skills.",
+            te: "అవును. బలమైన బేసిక్స్ నిర్మించుకోవాలనుకునే ఫ్రెషర్లకు బిగినర్ కోర్సులు, మరియు ఉద్యోగ-ఆధారిత నైపుణ్యాలను నేర్చుకోవాలనుకునే వారికి ప్రొఫెషనల్ కోర్సులు ఎంతో ఉపయోగపడతాయి.",
+            hi: "हाँ। मजबूत नींव बनाने वाले फ्रेशर्स के लिए बिगिनर कोर्सेस और जॉब-ओरिएंटेड स्किल्स सीखने वालों के लिए प्रोफेशनल कोर्सेस बहुत उपयोगी हैं।"
+          },
+          tags: ["freshers", "fundamentals", "suitable"]
+        },
+        {
+          id: "tr-16",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Is the training practical or theory-based?",
+            te: "ఈ శిక్షణ ప్రాక్టికల్‌గా ఉంటుందా లేక థియరీ ఆధారితంగా ఉంటుందా?",
+            hi: "क्या ट्रेनिंग प्रैक्टिकल है या थ्योरी आधारित?"
+          },
+          answer: {
+            en: "The training is designed to be practical, with hands-on projects, real-time project experience, interview preparation, and live interactive sessions.",
+            te: "ఈ శిక్షణ పూర్తిగా ప్రాక్టికల్ విధానంలో రూపొందించబడింది, ఇందులో హ్యాండ్స్-ఆన్ ప్రాజెక్ట్‌లు, రియల్-టైమ్ ప్రాజెక్ట్ అనుభవం, ఇంటర్వ్యూ ప్రిపరేషన్ మరియు లైవ్ ఇంటరాక్టివ్ సెషన్‌లు ఉంటాయి.",
+            hi: "ट्रेनिंग को पूरी तरह से प्रैक्टिकल बनाया गया है, जिसमें हैंड्स-ऑन प्रोजेक्ट्स, रियल-टाइम प्रोजेक्ट अनुभव, इंटरव्यू तैयारी और लाइव सेशन शामिल हैं।"
+          },
+          tags: ["practical", "theory", "hands-on projects"]
+        },
+        {
+          id: "tr-17",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "Are seats limited?",
+            te: "సీట్లు పరిమితంగా ఉన్నాయా?",
+            hi: "क्या सीटें सीमित हैं?"
+          },
+          answer: {
+            en: "Yes. The course details mention limited seats available, so learners are encouraged to enroll early.",
+            te: "అవును. కోర్సు వివరాల ప్రకారం సీట్లు పరిమితంగా ఉన్నాయి, కాబట్టి విద్యార్థులు ముందుగానే ఎన్‌రోల్ చేసుకోవాల్సిందిగా సూచించడమైనది.",
+            hi: "हाँ। कोर्सेस में सीमित सीटें उपलब्ध हैं, इसलिए छात्रों को जल्दी एडमिशन लेने की सलाह दी जाती है।"
+          },
+          tags: ["seats", "limited seats", "enroll early"]
+        },
+        {
+          id: "tr-18",
+          category: { en: "Training Programs", te: "ట్రైనింగ్ ప్రోగ్రామ్‌లు", hi: "ట్రైనింగ్ ప్రోగ్రామ్స్" },
+          question: {
+            en: "How can students enroll for training?",
+            te: "శిక్షణ కోసం విద్యార్థులు ఎలా ఎన్‌రోల్ చేసుకోవాలి?",
+            hi: "छात्र ट्रेनिंग के लिए कैसे एडमिशन ले सकते हैं?"
+          },
+          answer: {
+            en: "Students can contact Tinitiate AI to enroll in the required course.\nWhatsApp: +91 6309123485\nEmail: contact@tinitiateai.com\nWebsite: tinitiateai.com",
+            te: "విద్యార్థులు Tinitiate AIని సంప్రదించి కావలసిన కోర్సులో చేరవచ్చు:\nవాట్సాప్: +91 6309123485\nఈమెయిల్: contact@tinitiateai.com\nవెబ్‌సైట్: tinitiateai.com",
+            hi: "छात्र आवश्यक कोर्स में दाखिला लेने के लिए Tinitiate AI से संपर्क कर सकते हैं:\nव्हाट्सएप: +91 6309123485\nईमेल: contact@tinitiateai.com\nवेबसाइट: tinitiateai.com"
+          },
+          tags: ["enroll", "contact", "whatsapp", "email", "website"]
+        }
+      ];
+
+      let activeCategory = 'All';
+      let searchQuery = '';
+
+      function highlightText(text, query) {
+        if (!query || !query.trim()) return Shell.esc(text);
+        const escapedQuery = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${escapedQuery})`, 'gi');
+        const escapedText = Shell.esc(text);
+        return escapedText.replace(regex, '<mark class="faq-highlight">$1</mark>');
+      }
+
+      function renderEnquiryPage() {
+        const t = Shell.t;
+        const esc = Shell.esc;
+        const pick = Shell.pick;
+        const dataset = OFFICIAL_ENQUIRIES;
+
+        const distinctCategories = ['All', ...new Set(dataset.map(item => pick(item.category)))];
+
+        const query = searchQuery.toLowerCase().trim();
+        const filtered = dataset.filter(item => {
+          const itemCat = pick(item.category);
+          const itemQ = pick(item.question).toLowerCase();
+          const itemA = pick(item.answer).toLowerCase();
+
+          const matchesCat = (activeCategory === 'All' || itemCat === activeCategory);
+          const matchesQuery = !query || 
+            itemQ.includes(query) || 
+            itemA.includes(query) || 
+            (item.tags && item.tags.some(tag => tag.toLowerCase().includes(query)));
+
+          return matchesCat && matchesQuery;
+        });
+
+        const main = document.getElementById('rtMain');
+        if (!main) return;
+
+        main.innerHTML = `
+          <!-- Blue Top Header Banner matching Practice Page -->
+          <section class="enquiry-hero-banner">
+            <div class="enquiry-hero-kicker">
+              <span class="msr" style="font-size: 16px;">forum</span>
+              <span>${esc(t('navEnquiry') || 'Enquiries')}</span>
+            </div>
+            <h1 class="enquiry-hero-title">${esc(t('enquiryTitle') || 'Chat Enquiries & FAQs')}</h1>
+            <p class="enquiry-hero-lead">${esc(t('enquiryLead') || 'Official responses for course training, fee structures, and placement assistance.')}</p>
+          </section>
+
+          <!-- Search & Filter Card -->
+          <div class="enquiry-filter-card">
+            <input 
+              type="text" 
+              id="faqSearchInput" 
+              class="enquiry-search-bar" 
+              placeholder="${esc(t('searchPlaceholder') || 'Search questions, keywords, or answers...')}" 
+              value="${esc(searchQuery)}"
+            />
+            
+            <div id="faqCategoryChips" class="enquiry-chips">
+              ${distinctCategories.map(cat => `
+                <button type="button" class="enquiry-chip ${cat === activeCategory ? 'active' : ''}" data-cat="${esc(cat)}">
+                  ${esc(cat === 'All' ? (t('allCategories') || 'All') : cat)}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- FAQ Cards List -->
+          <div id="faqItemsContainer">
+            ${filtered.length === 0 ? `
+              <div class="faq-empty-state">
+                ${esc(t('noResults') || 'No matching enquiries found.')}
+              </div>
+            ` : filtered.map(item => `
+              <article class="faq-item-card">
+                <span class="faq-badge">${esc(pick(item.category))}</span>
+                <h3 class="faq-question">${highlightText(pick(item.question), searchQuery)}</h3>
+                <p class="faq-answer">${highlightText(pick(item.answer), searchQuery)}</p>
+              </article>
+            `).join('')}
+          </div>
+        `;
+
+        const input = document.getElementById('faqSearchInput');
+        if (input) {
+          input.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderEnquiryPage();
+            const reattachedInput = document.getElementById('faqSearchInput');
+            if (reattachedInput) {
+              reattachedInput.focus();
+              reattachedInput.setSelectionRange(searchQuery.length, searchQuery.length);
+            }
+          });
+        }
+
+        const chipsContainer = document.getElementById('faqCategoryChips');
+        if (chipsContainer) {
+          chipsContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('button[data-cat]');
+            if (btn) {
+              activeCategory = btn.dataset.cat;
+              renderEnquiryPage();
+            }
+          });
+        }
+      }
+
+      Shell.init(renderEnquiryPage);
+    })();
+  </script>
+</body>
+</html>
